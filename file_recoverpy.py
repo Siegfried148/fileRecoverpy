@@ -78,14 +78,14 @@ def findFiles(image,formats,limit):
 						if not byte: break
 						file += byte	#Lee un byte por vez y lo va agregando al archivo
 						if footer is None:
-							if len(file) > limit: break	#Rompe el ciclo si no hay un footer definido
+							if len(file) > limit: break	#Rompe el ciclo si no hay un footer definido y alcanzó límite
 						elif c_footer < len(footer):	#Valida que se encuentre el footer completo
 							if (byte == footer[c_footer].decode('hex')):
 								c_footer += 1
 							else:
 								c_footer = 0
 							if c_footer == len(footer): break #Rompe el ciclo
-					writeFile(f,c_file,file) #Escribe la cadena encontrada
+					writeFile(f,c_file,file) #Escribe la cadena encontrada en nuevo archivo
 					c_file += 1 #Como encontró un archivo, aumenta el contador
 					c_header = 0 #Resetea valores para el siguiente archivo
 					c_footer = 0
